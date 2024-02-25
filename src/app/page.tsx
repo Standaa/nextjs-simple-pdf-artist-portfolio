@@ -1,62 +1,48 @@
 "use client";
 
-import { useState } from "react";
-
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "react-pdf/dist/esm/Page/TextLayer.css";
-import { pdfjs, Document, Page } from "react-pdf";
-import { useWindowWidth, useWindowHeight } from "@wojtekmaj/react-hooks";
-import { FixedSizeList as List } from "react-window";
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
-
-// 16:9 aspect ratio
-const PDF_ASPECT_RATIO = 1.77;
+const Menu = () => (
+  <div className="text-center">
+    <h1 className="text-7xl text-black mb-4">Iseult Perrault</h1>
+    <nav>
+      <ul className="flex space-x-4 justify-around">
+        <li>
+          <a
+            href="portfolio"
+            className="text-black hover:text-gray-600 text-3xl"
+          >
+            Portfolio
+          </a>
+        </li>
+        <li>
+          <a href="cv" className="text-black hover:text-gray-600 text-3xl">
+            CV
+          </a>
+        </li>
+        <li>
+          <a
+            href="mailto:perraultiseult@gmail.com"
+            className="text-black hover:text-gray-600 text-3xl"
+          >
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+);
 
 export default function Home() {
-  const [numPages, setNumPages] = useState<number>(0);
-  const windowWidth = useWindowWidth() || 0;
-  const windowHeight = useWindowWidth() || 0;
-
-  async function onLoadSuccess({
-    numPages,
-    getPage,
-  }: {
-    numPages: number;
-    getPage: any;
-  }) {
-    setNumPages(numPages);
-  }
-
-  const renderPage = ({ index, style }: { index: number; style: any }) => (
-    <div style={style}>
-      <Page
-        pageNumber={index + 1}
-        className="mb-8 p-11"
-        width={windowWidth - 100}
-      />
-    </div>
-  );
-
   return (
-    <div>
-      <Document
-        file="portfolio2024.pdf"
-        onLoadSuccess={onLoadSuccess}
-        loading={"Loading..."}
-        error={"Error loading PDF"}
-        noData={"No data available"}
-        className="bg-white"
+    <div
+      className="bg-fixed bg-center bg-cover h-screen"
+      style={{ backgroundImage: "url('/landing_page.png" }}
+    >
+      <div
+        className="bg-fixed bg-center bg-cover h-screen flex justify-center pt-[20rem]"
+        style={{ backgroundImage: "url('/path/to/your/image.jpg')" }}
       >
-        <List
-          height={windowHeight}
-          itemCount={numPages}
-          itemSize={windowWidth / PDF_ASPECT_RATIO}
-          width={windowWidth}
-        >
-          {renderPage}
-        </List>
-      </Document>
+        <Menu />
+      </div>
     </div>
   );
 }
