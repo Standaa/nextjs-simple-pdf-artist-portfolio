@@ -19,7 +19,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.23.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.23.2":
   version: 7.23.9
   resolution: "@babel/runtime@npm:7.23.9"
   dependencies:
@@ -397,6 +397,15 @@ __metadata:
   dependencies:
     react-pdf: "*"
   checksum: 9c53f15ed6fc99882c382dd0d14811dadd4e7bd77edd332a7985e7c5acde11b8ab0c8e0be24c57be4a5ae04479266a28fe079b5b1c48032b43f280af1bf3f15d
+  languageName: node
+  linkType: hard
+
+"@types/react-window@npm:^1.8.8":
+  version: 1.8.8
+  resolution: "@types/react-window@npm:1.8.8"
+  dependencies:
+    "@types/react": "*"
+  checksum: 253c9d6e0c942f34633edbddcbc369324403c42458ff004457c5bd5972961d8433a909c0cc1a89c918063d5eb85ecbdd774142af2555fae61f4ceb3ba9884b5a
   languageName: node
   linkType: hard
 
@@ -2702,6 +2711,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"memoize-one@npm:>=3.1.1 <6":
+  version: 5.2.1
+  resolution: "memoize-one@npm:5.2.1"
+  checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
+  languageName: node
+  linkType: hard
+
 "merge-refs@npm:^1.2.1":
   version: 1.2.2
   resolution: "merge-refs@npm:1.2.2"
@@ -3316,6 +3332,7 @@ __metadata:
     "@types/react": ^18
     "@types/react-dom": ^18
     "@types/react-pdf": ^7.0.0
+    "@types/react-window": ^1.8.8
     "@wojtekmaj/react-hooks": ^1.19.0
     autoprefixer: ^10.0.1
     eslint: ^8
@@ -3325,6 +3342,7 @@ __metadata:
     react: ^18
     react-dom: ^18
     react-pdf: ^7.7.1
+    react-window: ^1.8.10
     tailwindcss: ^3.4.1
     typescript: ^5
   languageName: unknown
@@ -3518,6 +3536,19 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 8c43cbc844362028e4cff0c4ac95f1f59a58ca578a620ef5711bc8f5166f7a3df4f3c321367e74cddc3e46e29b990f3a6d01f9a5d46e0833e5f97f475913c895
+  languageName: node
+  linkType: hard
+
+"react-window@npm:^1.8.10":
+  version: 1.8.10
+  resolution: "react-window@npm:1.8.10"
+  dependencies:
+    "@babel/runtime": ^7.0.0
+    memoize-one: ">=3.1.1 <6"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: e8830f32e3ad4bf91af9cdc5cead84148c7694ce6abd9fdb447fb609da6cd4bbd0bbc75ff985f78828f4bbbd3ba4cbc98235cc9c056b5e5787578518f7fafbb9
   languageName: node
   linkType: hard
 

@@ -1,84 +1,61 @@
 "use client";
 
-import {
-  FC,
-  useRef,
-  useState,
-  useLayoutEffect,
-  useEffect,
-  ReactElement,
-} from "react";
+import { useState } from "react";
 
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import { pdfjs, Document, Page } from "react-pdf";
-import useResizeObserver from "@react-hook/resize-observer";
+import { useWindowWidth, useWindowHeight } from "@wojtekmaj/react-hooks";
+import { FixedSizeList as List } from "react-window";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-const useWidth = (target: any) => {
-  const [width, setWidth] = useState(null);
-
-  useLayoutEffect(() => {
-    setWidth(target.current.getBoundingClientRect().width);
-  }, [target]);
-
-  useResizeObserver(target, (entry: any) => {
-    setWidth(entry.contentRect.width);
-  });
-  return width;
-};
-
-interface PortfolioPageProps {
-  pageIndex: number;
-  width: any;
-}
-
-const PortfolioPage: FC<PortfolioPageProps> = ({ pageIndex, width }) => {
-  return (
-    <Page
-      key={`page_${pageIndex}`}
-      pageNumber={pageIndex + 1}
-      className="mb-8 p-11"
-      width={width}
-    />
-  );
-};
+// 16:9 aspect ratio
+const PDF_ASPECT_RATIO = 1.77;
 
 export default function Home() {
   const [numPages, setNumPages] = useState<number>(0);
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [portfolioPages, setPortfolioPages] = useState<ReactElement[]>([]);
+  const windowWidth = useWindowWidth() || 0;
+  const windowHeight = useWindowWidth() || 0;
 
-  const wrapperDiv = useRef(null);
-  const width = useWidth(wrapperDiv);
-
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
+  async function onLoadSuccess({
+    numPages,
+    getPage,
+  }: {
+    numPages: number;
+    getPage: any;
+  }) {
     setNumPages(numPages);
   }
 
-  useEffect(() => {
-    if (width && width > 0 && numPages > 0) {
-      console.log("width", width);
-
-      let pages: ReactElement[] = [];
-
-      for (let i = 1; i <= numPages; i++) {
-        setPortfolioPages([]);
-        pages.push(<PortfolioPage pageIndex={i} width={width} />);
-        setPortfolioPages(pages);
-      }
-    }
-  }, [width, numPages]);
+  const renderPage = ({ index, style }: { index: number; style: any }) => (
+    <div style={style}>
+      <Page
+        pageNumber={index + 1}
+        className="mb-8 p-11"
+        width={windowWidth - 100}
+      />
+    </div>
+  );
 
   return (
-    <div className="wrapper" ref={wrapperDiv}>
+    <div>
       <Document
         file="portfolio2024.pdf"
-        onLoadSuccess={onDocumentLoadSuccess}
+        onLoadSuccess={onLoadSuccess}
+        loading={"Loading..."}
+        error={"Error loading PDF"}
+        noData={"No data available"}
         className="bg-white"
       >
-        {portfolioPages}
+        <List
+          height={windowHeight}
+          itemCount={numPages}
+          itemSize={windowWidth / PDF_ASPECT_RATIO}
+          width={windowWidth}
+        >
+          {renderPage}
+        </List>
       </Document>
     </div>
   );
