@@ -2,6 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { Roboto } from "next/font/google";
+
+// Load Roboto font with different weights
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  display: "swap",
+  variable: "--font-roboto",
+});
 
 const CircleMenu = () => {
   const [mounted, setMounted] = useState(false);
@@ -9,15 +18,15 @@ const CircleMenu = () => {
 
   // Menu items with their hrefs
   const menuItems = [
-    { name: "CV", href: "cv" },
+    { name: "Contact", href: "contact" },
     { name: "Portfolio", href: "portfolio" },
     {
       name: "Instagram",
       href: "https://www.instagram.com/i.perrault",
       external: true,
     },
-    { name: "Contact", href: "contact" },
-    { name: "Catalogue", href: "catalogue" },
+    { name: "CV", href: "cv" },
+    { name: "No Rain, No Flowers Catalogue", href: "catalogue" },
   ];
 
   // Update window size on resize
@@ -83,10 +92,9 @@ const CircleMenu = () => {
     };
   };
 
-  // Calculate responsive font size
+  // Get class for menu item text
   const getMenuItemClass = () => {
-    const baseClass =
-      "text-black hover:text-blue-500 hover:shadow-text font-bold whitespace-nowrap transition-all duration-300 text-center";
+    const baseClass = `text-black hover:text-blue-500 hover:shadow-text font-light transition-all duration-300 text-center ${roboto.className}`;
 
     if (windowSize.width < 640) {
       // Mobile
@@ -98,6 +106,21 @@ const CircleMenu = () => {
       // Desktop
       return `${baseClass} text-4xl`;
     }
+  };
+
+  // Format menu item name if needed
+  const formatMenuItemName = (name: string) => {
+    // If it's the long catalogue text and not on mobile, add line breaks
+    if (name === "No Rain, No Flowers Catalogue" && windowSize.width >= 640) {
+      return (
+        <>
+          <span className="block">No Rain,</span>
+          <span className="block">No Flowers</span>
+          <span className="block">Catalogue</span>
+        </>
+      );
+    }
+    return name;
   };
 
   useEffect(() => {
@@ -168,11 +191,11 @@ const CircleMenu = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {item.name}
+                    {formatMenuItemName(item.name)}
                   </a>
                 ) : (
                   <a href={item.href} className={menuItemClass}>
-                    {item.name}
+                    {formatMenuItemName(item.name)}
                   </a>
                 )}
               </div>
@@ -193,7 +216,7 @@ export default function Home() {
 
   return (
     <div
-      className="h-screen grid place-items-center relative overflow-hidden"
+      className={`h-screen grid place-items-center relative overflow-hidden ${roboto.variable}`}
       style={{
         background:
           "radial-gradient(circle, #ffffff 0%, #f0f8ff 50%, #b9e3ff 100%)",
@@ -201,7 +224,9 @@ export default function Home() {
     >
       {/* Responsive title positioning */}
       <div className="absolute top-8 left-8 z-10">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl text-black">
+        <h1
+          className={`text-3xl sm:text-4xl md:text-5xl text-black font-light ${roboto.className}`}
+        >
           Iseult Perrault
         </h1>
       </div>
