@@ -133,13 +133,21 @@ const CircleMenu = () => {
 
   const imageSize = getResponsiveImageSize();
   const menuItemClass = getMenuItemClass();
+  const isMobile = windowSize.width < 640;
 
   return (
     <div className="relative grid place-items-center w-full h-full">
-      {/* Flower image in a centered grid cell */}
+      {/* Flower image with conditional positioning */}
       <div
-        className={`w-[${imageSize}px] h-[${imageSize}px] bg-contain bg-center bg-no-repeat opacity-90`}
-        style={{ width: imageSize, height: imageSize }}
+        className={`bg-contain bg-center bg-no-repeat opacity-90`}
+        style={{
+          width: imageSize,
+          height: imageSize,
+          position: "absolute",
+          top: isMobile ? "30%" : "50%",
+          left: "50%",
+          transform: isMobile ? "translateX(-50%)" : "translate(-50%, -50%)",
+        }}
       >
         <Image
           src="/flower_home.png"
@@ -151,11 +159,16 @@ const CircleMenu = () => {
         />
       </div>
 
-      {/* Menu items absolutely positioned relative to the center */}
+      {/* Menu items absolutely positioned */}
       <div className="absolute grid place-items-center w-full h-full">
-        {windowSize.width < 640 ? (
-          // Mobile vertical menu
-          <div className="flex flex-col space-y-4 text-center mt-[260px]">
+        {isMobile ? (
+          // Mobile vertical menu positioned below the flower
+          <div
+            className="flex flex-col space-y-4 text-center"
+            style={{
+              marginTop: isMobile ? `calc(${imageSize}px + 10vh)` : "260px",
+            }}
+          >
             {menuItems.map((item) => (
               <div key={item.name}>
                 {item.external ? (
