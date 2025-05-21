@@ -19,10 +19,7 @@ const Menu = () => (
           </a>
         </li>
         <li>
-          <a
-            href="mailto:perraultiseult@gmail.com"
-            className="text-black hover:text-gray-600 text-3xl"
-          >
+          <a href="contact" className="text-black hover:text-gray-600 text-3xl">
             Contact
           </a>
         </li>
@@ -35,7 +32,7 @@ export default function Home() {
   return (
     <div
       className="bg-fixed bg-center bg-cover h-screen"
-      style={{ backgroundImage: "url('/landing_page.png" }}
+      style={{ backgroundImage: "url('/landing_page.png')" }}
     >
       <div
         className="bg-fixed bg-center bg-cover h-screen flex justify-center pt-[20rem]"
