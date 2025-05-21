@@ -19,8 +19,26 @@ const Menu = () => (
           </a>
         </li>
         <li>
+          <a
+            href="catalogue"
+            className="text-black hover:text-gray-600 text-3xl"
+          >
+            Catalogue
+          </a>
+        </li>
+        <li>
           <a href="contact" className="text-black hover:text-gray-600 text-3xl">
             Contact
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.instagram.com/i.perrault"
+            className="text-black hover:text-gray-600 text-3xl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
           </a>
         </li>
       </ul>
