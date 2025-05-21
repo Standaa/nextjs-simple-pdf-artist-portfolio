@@ -144,7 +144,7 @@ const CircleMenu = () => {
           width: imageSize,
           height: imageSize,
           position: "absolute",
-          top: isMobile ? "30%" : "50%",
+          top: isMobile ? "20%" : "50%",
           left: "50%",
           transform: isMobile ? "translateX(-50%)" : "translate(-50%, -50%)",
         }}
