@@ -12,6 +12,8 @@ const roboto = Roboto({
   variable: "--font-roboto",
 });
 
+const catalogueUrl = process.env.NEXT_PUBLIC_CATALOGUE_URL ?? "";
+
 const CircleMenu = () => {
   const [mounted, setMounted] = useState(false);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -26,7 +28,10 @@ const CircleMenu = () => {
       external: true,
     },
     { name: "CV", href: "cv" },
-    { name: "No Rain, No Flowers Catalogue", href: "catalog" },
+    {
+      name: "No Rain, No Flowers Catalogue",
+      href: catalogueUrl,
+    },
   ];
 
   // Update window size on resize
