@@ -26,7 +26,7 @@ const CircleMenu = () => {
       external: true,
     },
     { name: "CV", href: "cv" },
-    { name: "No Rain, No Flowers Catalogue", href: "catalogue" },
+    { name: "No Rain, No Flowers Catalogue", href: "catalog" },
   ];
 
   // Update window size on resize
