@@ -2,12 +2,10 @@
 
 import { useEffect } from "react";
 
-export default function Catalogue() {
+export default function Catalog() {
   const catalogueUrl = process.env.NEXT_PUBLIC_CATALOGUE_URL ?? "";
 
   useEffect(() => {
-    // Redirect to the mock URL
-    console.log("catalogueUrl", catalogueUrl);
     window.location.href = catalogueUrl;
   }, []);
 
