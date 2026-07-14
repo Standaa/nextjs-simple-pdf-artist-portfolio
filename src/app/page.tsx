@@ -45,6 +45,7 @@ const CircleMenu = () => {
 
     // Initial size
     if (typeof window !== "undefined") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reads window size, unavailable during SSR
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -129,6 +130,7 @@ const CircleMenu = () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR hydration guard
     setMounted(true);
   }, []);
 
@@ -229,6 +231,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR hydration guard
     setMounted(true);
   }, []);
 
